@@ -1,6 +1,5 @@
 package io.flight.status.api
 
-import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -20,19 +19,30 @@ class Producer {
     @Value("\${flight-status.api}")
     private lateinit var flightStatusApi: String
 
+    @Value("\${flight-status.version}")
+    private lateinit var flightStatusApiVersion: String
+
+    @Value("\${flight-status.app.id}")
+    private lateinit var applicationId: String
+
+    @Value("\${flight-status.app.key}")
+    private lateinit var applicationKey: String
+
     @Resource
     private lateinit var objectMapper: ObjectMapper
+
+    @Resource
+    private lateinit var restTemplate: RestTemplate
 
     @Bean
     fun produceFlightStatusInformation(): Supplier<Flights?> {
         var flights: Flights? = null
-        val restTemplate = RestTemplate()
         val uri = URI("$flightStatusApi?scheduleDate=2020-11-29&includedelays=false&page=0&sort=-scheduleTime&fromDateTime=2020-11-29T14:50:00&toDateTime=2020-11-29T17:50:00&searchDateTimeField=scheduleDateTime")
         val headers = HttpHeaders().apply {
             set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-            set("app_id", "app_id")
-            set("app_key", "app_key")
-            set("ResourceVersion", "v4")
+            set("app_id", applicationId)
+            set("app_key", applicationKey)
+            set("ResourceVersion", flightStatusApiVersion)
         }
         val requestEntity = HttpEntity(null, headers)
         val result = restTemplate.exchange(uri, HttpMethod.GET, requestEntity, String::class.java)

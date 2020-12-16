@@ -1,19 +1,23 @@
 flight-status:
   api: https://api.schiphol.nl/public-flights/flights
+  version: v4
+  app:
+    id: <id>
+    key: <key>
 
 spring:
   kafka:
     properties:
       # confluent cloud config
-      bootstrap.servers: <kafka-server-url>
+      bootstrap.servers: <confluent-kafka-server>
       sasl.mechanism: PLAIN
       sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required
   username='username' password='password';"
       security.protocol: SASL_SSL
       # confluent schema registry
-      schema.registry.url: <schema-registry-url>
+      schema.registry.url: <confluent-schema-registry>
       basic.auth.credentials.source: USER_INFO
-      schema.registry.basic.auth.user.info: <auth-user-server-info>
+      schema.registry.basic.auth.user.info: <user-info>
       streams:
         replication-factor: 3
   cloud:
