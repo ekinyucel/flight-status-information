@@ -1,0 +1,160 @@
+[
+   {
+     "doc": "A record for route type",
+     "fields": [
+       {
+         "doc": "The destination information",
+         "name": "destinations",
+         "type": {
+           "items": "string",
+           "type": "array"
+         }
+       },
+       {
+         "doc": "An indicator for whether the route is within EU or not",
+         "name": "eu",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "An indicator to check whether the route is required to have a visa or not",
+         "name": "visa",
+         "type": ["null", "string"]
+       }
+     ],
+     "name": "Route",
+     "namespace": "com.flight.status.api",
+     "type": "record"
+   },
+   {
+     "doc": "A record for aircraft type",
+     "fields": [
+       {
+         "doc": "iata code",
+         "name": "iataMain",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "iata code",
+         "name": "iataSub",
+         "type": ["null", "string"]
+       }
+     ],
+     "name": "AircraftType",
+     "namespace": "com.flight.status.api",
+     "type": "record"
+   },
+   {
+     "doc": "A flight object",
+     "fields": [
+       {
+         "doc": "The last updated date of the flight information",
+         "name": "lastUpdatedAt",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The actual landing time of the flight",
+         "name": "actualLandingTime",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The aircraft registration number",
+         "name": "aircraftRegistration",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The aircraft type",
+         "name": "AircraftType",
+         "type": "AircraftType"
+       },
+       {
+         "doc": "The estimated landing time",
+         "name": "estimatedLandingTime",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The direction of flight",
+         "name": "flightDirection",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The name of the flight",
+         "name": "flightName",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The gate information",
+         "name": "gate",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The pier information",
+         "name": "pier",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The id of the flight status record",
+         "name": "id",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The indicator for the flight type",
+         "name": "isOperationalFlight",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The main flight information",
+         "name": "mainFlight",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The iata number",
+         "name": "prefixIATA",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The airline code",
+         "name": "airlineCode",
+         "type": "int"
+       },
+       {
+         "doc": "The route information",
+         "name": "route",
+         "type": "Route"
+       },
+       {
+         "doc": "The scheduled date time information",
+         "name": "scheduleDateTime",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The scheduled date information",
+         "name": "scheduleDate",
+         "type": ["null", "string"]
+       },
+       {
+         "doc": "The scheduled time information",
+         "name": "scheduleTime",
+         "type": ["null", "string"]
+       }
+     ],
+     "name": "Flight",
+     "namespace": "com.flight.status.api",
+     "type": "record"
+   },
+   {
+     "doc": "A record for flight status information",
+     "fields": [
+       {
+         "doc": "The flight list",
+         "name": "Flights",
+         "type": {
+           "items": "Flight",
+           "type": "array"
+         }
+       }
+     ],
+     "name": "Flights",
+     "namespace": "com.flight.status.api",
+     "type": "record"
+   }
+ ]

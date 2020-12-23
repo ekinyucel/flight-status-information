@@ -1,0 +1,34 @@
+spring:
+  kafka:
+    properties:
+      # confluent cloud config
+      bootstrap.servers: <kafka-broker>
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required
+  username='username' password='password';"
+      security.protocol: SASL_SSL
+      # confluent schema registry
+      schema.registry.url: <schema-registry>
+      basic.auth.credentials.source: USER_INFO
+      schema.registry.basic.auth.user.info: <auth-user-info>
+      streams:
+        replication-factor: 3
+  cloud:
+    stream:
+      function:
+        definition: consumeFlightStatusInformation
+      bindings:
+        # kafka consumer
+        consumeFlightStatusInformation-in-0:
+          binder: kafka
+          destination: flightstatus
+          content-type: application/*+avro
+          group: FlightStatusOutputter
+      kafka:
+        binder:
+          consumer-properties:
+            key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            specific.avro.reader: true
+logging:
+  level: info
