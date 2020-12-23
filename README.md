@@ -4,8 +4,8 @@ The main goal is to demonstrate the usage of Apache Kafka with Spring boot frame
 
 There are two different services in this repository (flight-source and flight-sink)
 
-Flight-source calls Schiphol flight status API and publishes the retrieved data to Kafka topic on confluent cloud
-Flight-sink consumes Kafka topic and retrieves data. Currently it prints out in the console. It is planned to use MongoDB cloud as a storage to store the consumed data.
+*   Flight-source calls Schiphol flight status API and publishes the retrieved data to Kafka topic on confluent cloud
+*   Flight-sink consumes Kafka topic and retrieves data. Currently it prints out in the console. It is planned to use MongoDB cloud as a storage to store the consumed data.
 
 (Uml diagram will come later.)
 
