@@ -1,4 +1,4 @@
-package io.flight.status.api
+package io.flight.status.producer
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper

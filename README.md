@@ -23,6 +23,5 @@ Schiphol flight status API is used as the source of the flight status informatio
 ### TODO
 
 *   Add unit test cases
-*   Functional routing&handlers instead of controllers
-*   Using non-blocking web client to fetch data from schiphol
+*   Create functional endpoints for controller level
 *   Retrieve data at constant time intervals (I want to retrieve the latest status flights within 10 minutes)

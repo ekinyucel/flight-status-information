@@ -1,4 +1,4 @@
-package io.flight.status.api
+package io.flight.status.consumer
 
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Service

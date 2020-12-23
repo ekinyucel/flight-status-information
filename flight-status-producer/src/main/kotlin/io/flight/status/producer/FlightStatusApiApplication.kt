@@ -1,4 +1,4 @@
-package io.flight.status.api
+package io.flight.status.producer
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

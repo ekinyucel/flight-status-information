@@ -1,4 +1,4 @@
-package io.flight.status.api
+package io.flight.status.producer
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -26,7 +26,7 @@ class Producer {
     private lateinit var applicationKey: String
 
     @Bean
-    fun produceFlightStatusInformation(): Supplier<Flights?> {
+    fun produceFlightStatusInformation(): Supplier<io.flight.status.producer.Flights?> {
         val uri = URI("$flightStatusApi?scheduleDate=2020-11-29&includedelays=false&page=0&sort=-scheduleTime&fromDateTime=2020-11-29T14:50:00&toDateTime=2020-11-29T17:50:00&searchDateTimeField=scheduleDateTime")
 
         val webClient = WebClient.builder()
@@ -39,7 +39,7 @@ class Producer {
 
         val result = webClient.get()
                 .retrieve()
-                .bodyToFlux(Flights::class.java)
+                .bodyToFlux(io.flight.status.producer.Flights::class.java)
                 .toStream().collect(Collectors.toList())
 
         return Supplier {
