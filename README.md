@@ -35,3 +35,4 @@ Schiphol flight status API is used as the source of the flight status informatio
 ### Remarks
 
 * Go to confluent cloud and create an account. Follow the instructions and get the key and secret for the access [Confluent cloud](https://confluent.cloud/)
+* Before connecting to the mongodb cluster on atlas, do not forget to use -Djdk.tls.client.protocols=TLSv1.2 JVM argument
