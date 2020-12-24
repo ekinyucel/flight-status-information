@@ -1,4 +1,4 @@
-package com.flight.status.api
+package com.flight.status.api.config
 
 import com.mongodb.ConnectionString
 import com.mongodb.reactivestreams.client.MongoClient

@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.web.util.UriComponentsBuilder
 import java.net.URI
 import java.util.function.Supplier
 import java.util.stream.Collectors
@@ -27,10 +28,18 @@ class Producer {
 
     @Bean
     fun produceFlightStatusInformation(): Supplier<Flights?> {
-        val uri = URI("$flightStatusApi?scheduleDate=2020-11-29&includedelays=false&page=0&sort=-scheduleTime&fromDateTime=2020-11-29T14:50:00&toDateTime=2020-11-29T17:50:00&searchDateTimeField=scheduleDateTime")
+        val uri = UriComponentsBuilder.fromUriString(flightStatusApi)
+                .queryParam("scheduleDate", "2020-11-29")
+                .queryParam("includedelays", "false")
+                .queryParam("page", 0)
+                .queryParam("sort", "-scheduleTime")
+                .queryParam("fromDateTime", "2020-11-29T14:50:00")
+                .queryParam("toDateTime", "2020-11-29T17:50:00")
+                .queryParam("searchDateTimeField", "scheduleDateTime")
+                .build().toString()
 
         val webClient = WebClient.builder()
-                .baseUrl(uri.toString())
+                .baseUrl(uri)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .defaultHeader("app_id", applicationId)
                 .defaultHeader("app_key", applicationKey)
