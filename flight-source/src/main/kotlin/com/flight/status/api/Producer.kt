@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.util.UriComponentsBuilder
 import java.net.URI
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.function.Supplier
 import java.util.stream.Collectors
 
@@ -28,13 +30,15 @@ class Producer {
 
     @Bean
     fun produceFlightStatusInformation(): Supplier<Flights?> {
+        val localDateTime = LocalDateTime.now().withNano(0)
+
         val uri = UriComponentsBuilder.fromUriString(flightStatusApi)
-                .queryParam("scheduleDate", "2020-11-29")
+                .queryParam("scheduleDate", LocalDate.now())
                 .queryParam("includedelays", "false")
                 .queryParam("page", 0)
                 .queryParam("sort", "-scheduleTime")
-                .queryParam("fromDateTime", "2020-11-29T14:50:00")
-                .queryParam("toDateTime", "2020-11-29T17:50:00")
+                .queryParam("fromDateTime", localDateTime.minusHours(4))
+                .queryParam("toDateTime", localDateTime.plusHours(4))
                 .queryParam("searchDateTimeField", "scheduleDateTime")
                 .build().toString()
 
