@@ -62,6 +62,7 @@ class Producer {
         val result = webClient.get()
                 .retrieve()
                 .bodyToFlux(Flights::class.java)
+                // change to coroutine
                 .toStream().collect(Collectors.toList())
 
         return Supplier {
