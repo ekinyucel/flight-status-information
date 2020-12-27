@@ -1,5 +1,6 @@
 package com.flight.status.api
 
+import com.flight.status.api.extensions.convertToFlightModel
 import com.flight.status.api.service.FlightInformationService
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Service
@@ -24,7 +25,7 @@ class Consumer {
     fun consumeFlightStatusInformation(): Consumer<Flights> {
         return Consumer { flights: Flights ->
             flights.flights.forEach { flight ->
-                flightInformationService.saveFlight(flight)
+                flightInformationService.saveFlight(flight.convertToFlightModel())
             }
         }
     }
